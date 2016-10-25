@@ -5,21 +5,6 @@ def analysis_one(search_list):
 		avg = get_avg_friends(i)
 		print 'Average friends for people tweeting about '+i+' = ',avg
 
-def get_avg_friends(term):
-	now = datetime.datetime.now()
-	path = '_'.join([str(now.year),str(now.month),str(now.day)])
-	path = term+'/'+path
-	file_name = path+'/'+term
-	with open(file_name+'.json', 'r') as json_file:
-		statuses = json.load(json_file)
-	avg = 0.0
-	n = 0
-	for i in statuses:
-		n += 1
-		avg += i['user']['friends_count']
-	avg = avg/n
-	return avg
-
 def analysis_two(term):
 	now = datetime.datetime.now()
 	path = '_'.join([str(now.year),str(now.month),str(now.day)])
@@ -65,12 +50,47 @@ def analysis_three(term):
 		d.remove(index)
 	return return_list
 
+def analysis_four(search_list):
+	for i in search_list:
+		tweet,retweet = get_max_retweet(i)
+		print 'Most popular tweet about '+i+' based on retweet = \n'+tweet
+		print 'Retweet count = ',retweet,'\n'
+
+def get_avg_friends(term):
+	now = datetime.datetime.now()
+	path = '_'.join([str(now.year),str(now.month),str(now.day)])
+	path = term+'/'+path
+	file_name = path+'/'+term
+	with open(file_name+'.json', 'r') as json_file:
+		statuses = json.load(json_file)
+	avg = 0.0
+	n = 0
+	for i in statuses:
+		n += 1
+		avg += i['user']['friends_count']
+	avg = avg/n
+	return avg
+
+def get_max_retweet(term):
+	now = datetime.datetime.now()
+	path = '_'.join([str(now.year),str(now.month),str(now.day)])
+	path = term+'/'+path
+	file_name = path+'/'+term
+	with open(file_name+'.json', 'r') as json_file:
+		statuses = json.load(json_file)
+	max_retweet_count = 0
+	for i in statuses:
+		if i['retweet_count'] > max_retweet_count:
+			max_retweet_count = i['retweet_count']
+			tweet = i['text']
+	return tweet, max_retweet_count
+
 
 if __name__ == "__main__":
 	
 	#Take search term from command line using argparse
 	parser = argparse.ArgumentParser(description = "Run one of five analysis")
-	parser.add_argument("-an",dest='an',default=2,help="Analysis Number")
+	parser.add_argument("-an",dest='an',default=1,help="Analysis Number")
 	args = parser.parse_args()
 	analysis_num = int(args.an)
 
@@ -81,11 +101,9 @@ if __name__ == "__main__":
 			term = str(raw_input('Enter search term #'+str(i+1)+' = '))
 			os.system('python Script1.py -st '+term)
 			search_list.append(term)
-
-		term = search_list[0]
 		analysis_one(search_list)
 	
-	elif analysis_num ==2:
+	elif analysis_num == 2:
 		term = str(raw_input('Enter the search term = '))
 		os.system('python Script1.py -st '+term)
 		print analysis_two(term)+' state is tweeting most about '+term
@@ -103,16 +121,14 @@ if __name__ == "__main__":
 			print '\nRetweet Count = ',i[1]
 			print
 
+	elif analysis_num == 4:
+		search_list = []
+		num = int(raw_input('Enter number of terms you want to search for = '))
+		for i in range(num):
+			term = str(raw_input('Enter search term #'+str(i+1)+' = '))
+			os.system('python Script1.py -st '+term)
+			search_list.append(term)
+		analysis_four(search_list)
+
 	else:
-		print 'Wrong argument. Please try 1, 2 or 3'
-
-
-
-
-
-
-
-
-
-
-
+		print 'Wrong argument. Please try 1 through 4'
