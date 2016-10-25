@@ -20,7 +20,32 @@ def get_avg_friends(term):
 	avg = avg/n
 	return avg
 
-
+def analysis_two(term):
+	now = datetime.datetime.now()
+	path = '_'.join([str(now.year),str(now.month),str(now.day)])
+	path = term+'/'+path
+	file_name = path+'/'+term
+	with open(file_name+'.json', 'r') as json_file:
+		statuses = json.load(json_file)
+	places = {}
+	flag = False
+	for i in statuses:
+		if i['place'] != None: 
+			flag = True
+			if i['place'] not in places.keys():
+				places[i['place']]=1
+			else:
+				places[i['place']] += 1	
+	if not flag:
+		return 'None'
+	else:
+		max_val = 0
+		for i in places.keys():
+			if places[i]>max_val:
+				return_val = i
+				max_val = places[i]
+		return return_val
+		
 def analysis_three(term):
 	now = datetime.datetime.now()
 	path = '_'.join([str(now.year),str(now.month),str(now.day)])
@@ -45,7 +70,7 @@ if __name__ == "__main__":
 	
 	#Take search term from command line using argparse
 	parser = argparse.ArgumentParser(description = "Run one of five analysis")
-	parser.add_argument("-an",dest='an',default=1,help="Analysis Number")
+	parser.add_argument("-an",dest='an',default=2,help="Analysis Number")
 	args = parser.parse_args()
 	analysis_num = int(args.an)
 
@@ -60,6 +85,11 @@ if __name__ == "__main__":
 		term = search_list[0]
 		analysis_one(search_list)
 	
+	elif analysis_num ==2:
+		term = str(raw_input('Enter the search term = '))
+		os.system('python Script1.py -st '+term)
+		print analysis_two(term)+' state is tweeting most about '+term
+
 	elif analysis_num == 3:
 		term = str(raw_input('Enter the search term = '))
 		os.system('python Script1.py -st '+term)
@@ -74,7 +104,7 @@ if __name__ == "__main__":
 			print
 
 	else:
-		print 'Wrong argument. Please try 1 or 3'
+		print 'Wrong argument. Please try 1, 2 or 3'
 
 
 

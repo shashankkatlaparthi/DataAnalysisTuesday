@@ -33,13 +33,15 @@ if __name__ == "__main__":
     
     #Get relevant tweets
     auth = OAuth1('QkhoFndp1I6eQ3QcwuYQ3OqsP', 'VQY9VQXIzhIdYCSQnapn4XXoFCy04lQRhb0ZwNOcEQrRnFKBtK', '730233993589882881-0zw1ICAawKXtAF463Kw1P4AO61S2mrn', 'pxGqq7m6y3kJnf7saL28pKA7ch4pFuDR4Ex8jtAuGRne1')
-    
+
     print 'Fetching Tweets for '+term
     base_url = 'https://api.twitter.com/1.1/search/tweets.json?q='
     since = '&since='+'-'.join([str(now.year),str(now.month),str(now.day-5)])
     until = '&until='+'-'.join([str(now.year),str(now.month),str(now.day)])
     count = '&count='+str(count)
-    get_url = base_url+term+since+until+count
+    lang = '&lang=en'
+    place_id = '&place=96683cc9126741d1'
+    get_url = base_url+term+since+until+count+lang+place_id
     r = requests.get(get_url, auth=auth)
     tweets_dict = r.json()
     print 'Creating files and saving tweets for '+term+'\n'
