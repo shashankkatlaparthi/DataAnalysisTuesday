@@ -1,0 +1,8 @@
+1) There are two Scripts script1.py and script2.py.
+2) We will need to run script2.py with arguments for analysis number.
+ For Analysis 1 - e.g: python script2.py -an 1 (here 1 being anlysis number)
+	enter the number of terms: 1 ( you can enter 2 or 3)
+	enter the terms: trump (for two terms enter trump hillary)
+ For Analysis 2 - e.g: python script2.py -an 3 
+	enter search term: trump (term to be searched for top 10 tweets)
+3) The script currently works for Analysis 1 and 3.
