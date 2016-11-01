@@ -8,6 +8,6 @@ Then, perform anlysis 2 by entering the number. Check the folder: Analysis_2/tag
 
 Then, perform Analysis 3 for the popular badges to be displayed.
 
-Executing analysis would give the number of questions and the total  answer.
+Executing analysis 4 would give the number of questions and the total  answer.
 
 Perform Analysis 5 to display the most downvoted user.
