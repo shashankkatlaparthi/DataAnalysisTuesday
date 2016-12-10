@@ -2,15 +2,13 @@ Data Analysis Final Project - Quantitative analysis of Movie Data
 
 Requirements for the Script:
 
-Installation of dependent packages - 
-	On Ubuntu/Debian based distributions:
-	sudo apt-get install python-matplotlib
-	sudo pip install pandas	
+        On Ubuntu/Debian based distributions:
+        sudo apt-get install python-matplotlib
+        sudo pip install pandas
 
-	On Red-Hat based distributions:
-	sudo yum install python-matplotlib
-	sudo pip install pandas
-
+        On Red-Hat based distributions:
+        sudo yum install python-matplotlib
+        sudo pip install pandas
 
 After succesful installation of the packages run Main.py file.
 
