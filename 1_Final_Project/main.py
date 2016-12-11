@@ -2,13 +2,6 @@
 import one, two, three, four, five
 import Tkinter
 
-'''
-one.analysis_one()
-two.analysis_two()
-three.analysis_three()
-four.analysis_four()
-'''
-
 class client_gui(Tkinter.Tk):
     def __init__(self,parent):
         Tkinter.Tk.__init__(self,parent)
@@ -40,22 +33,22 @@ class client_gui(Tkinter.Tk):
             command=self.analysis_one)
         button.grid(column=0,row=1,sticky='EW')
 
-        # Button 1
+        # Button 2
         button = Tkinter.Button(self,text=u"Analysis 2",
             command=self.analysis_two)
         button.grid(column=0,row=2,sticky='EW')
 
-        # Button 1
+        # Button 3
         button = Tkinter.Button(self,text=u"Analysis 3",
             command=self.analysis_three)
         button.grid(column=0,row=3,sticky='EW')
 
-        # Button 1
+        # Button 4
         button = Tkinter.Button(self,text=u"Analysis 4",
             command=self.analysis_four)
         button.grid(column=0,row=4,sticky='EW')
 
-        # Button 1
+        # Button 5
         button = Tkinter.Button(self,text=u"Analysis 5",
             command=self.analysis_five)
         button.grid(column=0,row=5,sticky='EW')
@@ -99,21 +92,6 @@ class client_gui(Tkinter.Tk):
 
     def analysis_five(self):
     	five.analysis_five()
-
-
-    '''
-    def recv(self):
-        while self.app_running:
-            data, a = self.s.recvfrom(1024)
-            if data:
-                self.display_text = self.display_text + "\n" + data
-                self.update_display()
-    def on_closing(self):
-        pdb.set_trace()
-        self.app_running = False
-        self.s.close()
-        self.destroy()
-        sys.exit()'''
 
     def second_analysis(self,event = 0):
         two.analysis_two(self.entryVariable.get())
